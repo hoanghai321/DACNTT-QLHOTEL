@@ -1,0 +1,139 @@
+﻿@model IEnumerable<DACNTT.Models.hotels>
+@using DACNTT.Models;
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/styles/nav_bar.css" rel="stylesheet" />
+    <link href="~/Content/styles/TableAdmin.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/button.css" rel="stylesheet" />
+</head>
+<body style="background-color: white">
+    <div class="container">
+        <div class="sidebar close">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">Admin</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/Home/IndexAdmin">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Trang chủ</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/IndexAdmin">Trang chủ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-collection'></i>
+                            <span class="link_name">Khác</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Khác</a></li>
+                        <li><a href="/Home/Admin">QL đặt phòng</a></li>
+                        <li><a href="/Home/HOTELAdmin">Khách sạn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Home/QLTK">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Tài khoản</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/QLTK">Quản lý tài khoản</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <!--<img src="image/profile.jpg" alt="profileImg">-->
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">Admin</div>
+                            <div class="job">Nhữ Hoàng Hải</div>
+                        </div>
+                        <i class='bx bx-log-out'></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i> &emsp;&emsp;&emsp; &emsp;&emsp;&emsp; &emsp;&emsp;&emsp; &emsp;&emsp;&emsp;
+                <div class="nav-item active">
+                    <form class="form-inline" action="@Url.Action("SearchHOTELAdmin", "Home")" method="post">
+                        <input name="search_param" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required />
+                        <input style="color:black" class="hai btn-outline-secondary my-2 my-sm-0" type="submit" value="Tìm kiếm" />
+                    </form>
+                </div>   &emsp; &emsp;
+                <div class="nav-item active">
+                    <form class="form-inline" action="@Url.Action("HOTELAdmin", "Home")" method="post">
+                        <input style="color:black" class="hai btn-outline-secondary my-2 my-sm-0" type="submit" value="Reset" />
+                    </form>
+                </div>&emsp; &emsp;
+                <div class="nav-item active">
+                    <form class="form-inline" action="/Home/CreateHotel" method="post">
+                        <a href="/Home/CreateHotel" style="color:black" class="hai btn-outline-secondary my-2 my-sm-0">Mới</a>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <div class="table-users">
+            <table cellspacing="0" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Mã Hotel</th>
+                        <th>Tên Khách sạn</th>
+                        <th>Địa điểm</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.hotels)
+                    {
+                    <tr>
+                        <td>@item.hotel_id</td>
+                        <td>@item.hotel_name</td>
+                        @foreach (var i in ViewBag.locations)
+                        {
+                            if (item.location_id == i.location_id)
+                            {
+                                <td>@i.city</td>
+                            }
+                        }
+                        <td style="text-align:center"><a class="hai2" href="/Home/CreateHotelImage/@item.hotel_id">Ảnh</a></td>
+                        <td style="text-align:center"><a class="hai2" onclick="if (confirm('Bạn có chắc muốn xoá không?') == true) { location.href='/Home/DeleteHotel/@item.hotel_id' }">Xoá</a></td>
+                        <td style="text-align:center"><a class="hai2" href="/Home/CreateRoom/@item.hotel_id">Thêm phòng</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>

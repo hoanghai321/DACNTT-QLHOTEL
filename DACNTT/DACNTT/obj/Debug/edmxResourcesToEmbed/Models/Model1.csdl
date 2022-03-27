@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BigSchool_NhuHoangHaiModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" />
+    <Property Name="AccessFailedCount" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="Int32" />
+  </EntityType>
+  <EntityType Name="bookcustomer">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="Int32" Nullable="false" />
+    <Property Name="NameCus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayStart" Type="DateTime" Precision="0" />
+    <Property Name="NgayEnd" Type="DateTime" Precision="0" />
+    <Property Name="TrangThai" Type="Int32" />
+  </EntityType>
+  <EntityType Name="hotels">
+    <Key>
+      <PropertyRef Name="hotel_id" />
+    </Key>
+    <Property Name="hotel_id" Type="Int32" Nullable="false" />
+    <Property Name="location_id" Type="Int32" Nullable="false" />
+    <Property Name="hotel_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_gia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_review" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_rating" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="hotel_link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="locations" Relationship="Self.FK__hotels__location__1D4655FB" FromRole="hotels" ToRole="locations" />
+    <NavigationProperty Name="Images" Relationship="Self.FK__Images__hotel_id__2DE6D218" FromRole="hotels" ToRole="Images" />
+    <NavigationProperty Name="sections" Relationship="Self.FK__sections__hotel___2116E6DF" FromRole="hotels" ToRole="sections" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="hotels" Relationship="Self.FK__Images__hotel_id__2DE6D218" FromRole="Images" ToRole="hotels" />
+  </EntityType>
+  <EntityType Name="locations">
+    <Key>
+      <PropertyRef Name="location_id" />
+    </Key>
+    <Property Name="location_id" Type="Int32" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="hotels" Relationship="Self.FK__hotels__location__1D4655FB" FromRole="locations" ToRole="hotels" />
+  </EntityType>
+  <EntityType Name="rooms">
+    <Key>
+      <PropertyRef Name="room_id" />
+      <PropertyRef Name="hotel_id" />
+      <PropertyRef Name="section_id" />
+    </Key>
+    <Property Name="room_id" Type="Int32" Nullable="false" />
+    <Property Name="hotel_id" Type="Int32" Nullable="false" />
+    <Property Name="section_id" Type="Int32" Nullable="false" />
+    <Property Name="sale_id" Type="Int32" />
+    <Property Name="floor" Type="Int32" />
+    <Property Name="gia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sales">
+    <Key>
+      <PropertyRef Name="sale_id" />
+    </Key>
+    <Property Name="sale_id" Type="Int32" Nullable="false" />
+    <Property Name="apply_month" Type="Int32" Nullable="false" />
+    <Property Name="sale_percent" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sections">
+    <Key>
+      <PropertyRef Name="hotel_id" />
+      <PropertyRef Name="section_id" />
+    </Key>
+    <Property Name="hotel_id" Type="Int32" Nullable="false" />
+    <Property Name="section_id" Type="Int32" Nullable="false" />
+    <Property Name="room_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="hotels" Relationship="Self.FK__sections__hotel___2116E6DF" FromRole="sections" ToRole="hotels" />
+  </EntityType>
+  <EntityType Name="Testimonials">
+    <Key>
+      <PropertyRef Name="test_id" />
+    </Key>
+    <Property Name="test_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="test_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="test_ngay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="test_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="test_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="test_icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__hotels__location__1D4655FB">
+    <End Role="locations" Type="Self.locations" Multiplicity="1" />
+    <End Role="hotels" Type="Self.hotels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="location_id" />
+      </Principal>
+      <Dependent Role="hotels">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Images__hotel_id__2DE6D218">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sections__hotel___2116E6DF">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="1" />
+    <End Role="sections" Type="Self.sections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="sections">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BigSchool_NhuHoangHaiEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="bookcustomer" EntityType="Self.bookcustomer" />
+    <EntitySet Name="hotels" EntityType="Self.hotels" />
+    <EntitySet Name="Images" EntityType="Self.Images" />
+    <EntitySet Name="locations" EntityType="Self.locations" />
+    <EntitySet Name="rooms" EntityType="Self.rooms" />
+    <EntitySet Name="sales" EntityType="Self.sales" />
+    <EntitySet Name="sections" EntityType="Self.sections" />
+    <EntitySet Name="Testimonials" EntityType="Self.Testimonials" />
+    <AssociationSet Name="FK__hotels__location__1D4655FB" Association="Self.FK__hotels__location__1D4655FB">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="hotels" EntitySet="hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__hotel_id__2DE6D218" Association="Self.FK__Images__hotel_id__2DE6D218">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sections__hotel___2116E6DF" Association="Self.FK__sections__hotel___2116E6DF">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="sections" EntitySet="sections" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

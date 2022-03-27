@@ -1,0 +1,24 @@
+﻿<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/Success.css" rel="stylesheet" />
+    <script src="~/Content/js/Success.js"></script>
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+    <div class="row">
+        <div class="modalbox error col-sm-8 col-md-6 col-lg-5 center animate">
+            <div class="icon">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+            </div>
+            <h1 style="color: red"><strong>Thất bại</strong></h1>
+            <p class="redo btn">
+                <h3 style="color: red">Vui lòng thử lại sau!</h3>
+            </p>
+            <form action="@Url.Action("Index", "Home")">
+                <button type="submit" class="redo btn">Ok</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>

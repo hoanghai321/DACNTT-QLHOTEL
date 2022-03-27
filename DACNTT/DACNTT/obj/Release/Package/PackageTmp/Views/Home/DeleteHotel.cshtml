@@ -1,0 +1,94 @@
+﻿@model DACNTT.Models.hotels
+
+@{
+    ViewBag.Title = "DeleteHotel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_review)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel_link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel_link)
+        </dd>
+    </dl>
+    <form action="/Home/DeleteHotelImage" method="post">
+        <input name="hotel_id" id="id" value="Hoàn tất xoá"/>
+    </form>
+</div>

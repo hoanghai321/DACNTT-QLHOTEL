@@ -1,0 +1,278 @@
+﻿/* Google fonts import link */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+}
+.header {
+    position:inherit;
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+img {
+    border-radius: 20%;
+    height: 60px;
+    width: 60px;
+}
+
+.table-users {
+    width: 100%;
+    border-collapse: collapse;
+    margin-left: 60px;
+    background: #1d1b31;
+    box-shadow: 20px 10px 0 rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 30px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-left: 60px;
+    background: #1d1b31;
+    box-shadow: 20px 10px 0 rgba(0, 0, 0, 0.1);
+    margin: auto;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+    table td, table th {
+        color: white;
+        padding: 14px;
+        border: 1px solid rgba(50, 50, 50, 0.93);
+        overflow: hidden;
+        transition: 0.5s;
+    }
+    table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+        table td:hover {
+            background-color: #FFF842;
+            color: #403E10;
+            font-weight: bold;
+            box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+            transform: translate3d(6px, -6px, 0);
+            transition-duration: 0.4s;
+            transition-property: all;
+        }
+
+        table td:last-child {
+            font-size: 0.95em;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+    table th {
+        background-color: #1d1b31;
+        font-weight: 500;
+        text-align: center;
+        padding-bottom: 2%;
+        padding-top: 2%;
+        padding-left: 2%;
+    }
+    table tr:nth-child(2n) {
+        background-color: #000000;
+    }
+
+    table tr:nth-child(2n+1) {
+        background-color: #000000;
+    }
+.nav-item{
+    margin-top:40px;
+}
+@media screen and (max-width: 700px) {
+    table, tr, td {
+        display: block;
+    }
+
+        td:first-child {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+        }
+
+        td:not(:first-child) {
+            clear: both;
+            margin-left: 100px;
+            padding: 4px 20px 4px 90px;
+            position: relative;
+            text-align: left;
+        }
+
+            td:not(:first-child):before {
+                color: #91ced4;
+                content: "";
+                display: block;
+                left: 0;
+                position: absolute;
+            }
+
+        td:nth-child(2):before {
+            content: "Name:";
+        }
+
+        td:nth-child(3):before {
+            content: "Email:";
+        }
+
+        td:nth-child(4):before {
+            content: "Phone:";
+        }
+
+        td:nth-child(5):before {
+            content: "Comments:";
+        }
+
+    tr {
+        padding: 10px 0;
+        position: relative;
+    }
+
+        tr:first-child {
+            display: none;
+        }
+}
+
+@media screen and (max-width: 500px) {
+    .header {
+        background-color: transparent;
+        color: white;
+        font-size: 2em;
+        font-weight: 700;
+        padding: 0;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+        border: 3px solid;
+        border-color: #daeff1;
+        height: 100px;
+        margin: 0.5rem 0;
+        width: 100px;
+    }
+
+    td:first-child {
+        background-color: #c8e7ea;
+        border-bottom: 1px solid #91ced4;
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        top: 0;
+        transform: translateY(0);
+        width: 100%;
+    }
+
+    td:not(:first-child) {
+        margin: 0;
+        padding: 5px 1em;
+        width: 100%;
+    }
+
+        td:not(:first-child):before {
+            font-size: 0.8em;
+            padding-top: 0.3em;
+            position: relative;
+        }
+
+    td:last-child {
+        padding-bottom: 1rem !important;
+    }
+
+    tr {
+        background-color: white !important; 
+        border-radius: 10px;
+        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+        margin: 0.5rem 0;
+        padding: 0;
+    }
+
+    .table-users {
+        border: none;
+        box-shadow: none;
+        overflow: visible;
+    }
+}
+#menu ul
+{
+  margin-top:  42px;
+}
+#menu ul li
+{
+  list-style-type: none;
+  display: inline;
+  margin-left: 50px;
+}
+{
+    color: #FFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#menu ul li a:visited {
+    color: #FFF;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#menu ul li a:hover {
+    color: #FFF;
+    background-color: #81B101;
+    -webkit-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.93);
+    -moz-box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.93);
+    box-shadow: 0px 4px 5px rgba(50, 50, 50, 0.93);
+}
+@media(max-width: 500px) {
+    .table thead {
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+        .table tr {
+            margin-bottom: 15px;
+        }
+
+        .table td {
+            text-align: right;
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+        }
+
+            .table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+}
+@media (max-width: 800px) {
+    table tr:nth-child(2n),
+    table tr:nth-child(2n+1) {
+        display: none;
+    }
+}
+

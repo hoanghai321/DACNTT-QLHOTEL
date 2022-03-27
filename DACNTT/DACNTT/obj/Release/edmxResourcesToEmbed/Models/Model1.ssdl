@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BigSchool_NhuHoangHaiModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" />
+    <Property Name="TwoFactorEnabled" Type="bit" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" />
+    <Property Name="AccessFailedCount" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Role" Type="int" />
+  </EntityType>
+  <EntityType Name="bookcustomer">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="int" Nullable="false" />
+    <Property Name="NameCus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="NgayStart" Type="date" />
+    <Property Name="NgayEnd" Type="date" />
+    <Property Name="TrangThai" Type="int" />
+  </EntityType>
+  <EntityType Name="hotels">
+    <Key>
+      <PropertyRef Name="hotel_id" />
+    </Key>
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="location_id" Type="int" Nullable="false" />
+    <Property Name="hotel_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="note" Type="nvarchar(max)" />
+    <Property Name="hotel_gia" Type="nvarchar" MaxLength="100" />
+    <Property Name="hotel_review" Type="nvarchar" MaxLength="50" />
+    <Property Name="hotel_title" Type="nvarchar" MaxLength="50" />
+    <Property Name="hotel_rating" Type="nvarchar" MaxLength="50" />
+    <Property Name="hotel_image" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="hotel_id" Type="int" />
+  </EntityType>
+  <EntityType Name="locations">
+    <Key>
+      <PropertyRef Name="location_id" />
+    </Key>
+    <Property Name="location_id" Type="int" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rooms">
+    <Key>
+      <PropertyRef Name="room_id" />
+      <PropertyRef Name="hotel_id" />
+    </Key>
+    <Property Name="room_id" Type="int" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="section_id" Type="int" />
+    <Property Name="sale_id" Type="int" />
+    <Property Name="floor" Type="int" />
+    <Property Name="gia" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sales">
+    <Key>
+      <PropertyRef Name="sale_id" />
+    </Key>
+    <Property Name="sale_id" Type="int" Nullable="false" />
+    <Property Name="sale_percent" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sections">
+    <Key>
+      <PropertyRef Name="section_id" />
+    </Key>
+    <Property Name="section_id" Type="int" Nullable="false" />
+    <Property Name="room_type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Testimonials">
+    <Key>
+      <PropertyRef Name="test_id" />
+    </Key>
+    <Property Name="test_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="test_name" Type="nvarchar(max)" />
+    <Property Name="test_ngay" Type="nvarchar(max)" />
+    <Property Name="test_note" Type="nvarchar(max)" />
+    <Property Name="test_image" Type="nvarchar(max)" />
+    <Property Name="test_icon" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK__hotels__location__1D4655FB">
+    <End Role="locations" Type="Self.locations" Multiplicity="1" />
+    <End Role="hotels" Type="Self.hotels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="locations">
+        <PropertyRef Name="location_id" />
+      </Principal>
+      <Dependent Role="hotels">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Images__hotel_id__2DE6D218">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rooms_hotels">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="rooms">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rooms_sales">
+    <End Role="sales" Type="Self.sales" Multiplicity="0..1" />
+    <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sales">
+        <PropertyRef Name="sale_id" />
+      </Principal>
+      <Dependent Role="rooms">
+        <PropertyRef Name="sale_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rooms_sections">
+    <End Role="sections" Type="Self.sections" Multiplicity="0..1" />
+    <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sections">
+        <PropertyRef Name="section_id" />
+      </Principal>
+      <Dependent Role="rooms">
+        <PropertyRef Name="section_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BigSchool_NhuHoangHaiModel2StoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bookcustomer" EntityType="Self.bookcustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hotels" EntityType="Self.hotels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="locations" EntityType="Self.locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rooms" EntityType="Self.rooms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sales" EntityType="Self.sales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sections" EntityType="Self.sections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Testimonials" EntityType="Self.Testimonials" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__hotels__location__1D4655FB" Association="Self.FK__hotels__location__1D4655FB">
+      <End Role="locations" EntitySet="locations" />
+      <End Role="hotels" EntitySet="hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Images__hotel_id__2DE6D218" Association="Self.FK__Images__hotel_id__2DE6D218">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rooms_hotels" Association="Self.FK_rooms_hotels">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="rooms" EntitySet="rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rooms_sales" Association="Self.FK_rooms_sales">
+      <End Role="sales" EntitySet="sales" />
+      <End Role="rooms" EntitySet="rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rooms_sections" Association="Self.FK_rooms_sections">
+      <End Role="sections" EntitySet="sections" />
+      <End Role="rooms" EntitySet="rooms" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

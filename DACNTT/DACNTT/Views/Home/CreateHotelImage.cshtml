@@ -1,0 +1,129 @@
+﻿@model DACNTT.Models.Images
+@using DACNTT.Models
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/styles/nav_bar.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/button.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar close">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">Admin</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/Home/IndexAdmin">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Trang chủ</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/IndexAdmin">Trang chủ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-collection'></i>
+                            <span class="link_name">Khác</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Khác</a></li>
+                        <li><a href="/Home/Admin">QL đặt phòng</a></li>
+                        <li><a href="/Home/HOTELAdmin">Khách sạn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Home/QLTK">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Tài khoản</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/QLTK">Quản lý tài khoản</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <!--<img src="image/profile.jpg" alt="profileImg">-->
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">Admin</div>
+                            <div class="job">Nhữ Hoàng Hải</div>
+                        </div>
+                        <i class='bx bx-log-out'></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i>
+            </div>
+        </section>
+        @using (Html.BeginForm("CreateHotelImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <hr />
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.Image, "Hình ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="hinhanh" id="hinhanh" />
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.Image, "Hình ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="hinhanh2" id="hinhanh2" />
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.Image, "Hình ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="hinhanh3" id="hinhanh3" />
+                    </div>
+                </div>
+
+                <div class="form-group2" hidden>
+                    @Html.LabelFor(model => model.hotel_id,"Mã khách sạn", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input name="hotel_id" id="id" value="@ViewBag.id"/>
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    <div class="hai">
+                        <input type="submit" value="Thêm" class="btn btn-outline-dark" />
+                    </div>
+                    <div class="hai">
+                        <div class="btn btn-outline-dark"><a href="/Home/HOTELAdmin" style="color:black">Quay lại</a></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>

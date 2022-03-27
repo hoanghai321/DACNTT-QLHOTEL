@@ -1,0 +1,691 @@
+﻿@using Microsoft.AspNet.Identity
+@using DACNTT.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Travelix Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Content/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/styles/responsive.css">
+</head>
+<body>
+    <div class="super_container">
+        <!-- Header -->
+        <header class="header">
+            <!-- Top Bar -->
+            <div class="top_bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex flex-row">
+                            <div class="phone">Hotline: +849 33037283</div>
+                            <div class="social">
+                                <ul class="social_list">
+                                    <li class="social_list_item"><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+                                    <li class="social_list_item"><a href="https://www.facebook.com/profile.php?id=100009744285303"><i class="fa fa-facebook-f"></i></a></li>
+                                    <li class="social_list_item"><a href="https://twitter.com/?lang=vi"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="social_list_item"><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                                    <li class="social_list_item"><a href="https://www.behance.net/"><i class="fa fa-behance"></i></a></li>
+                                    <li class="social_list_item">
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                            <li class="social_list_item"><a style="color:white" href="/Manage/Index">Hello @User.Identity.GetUserName()</a></li>
+                                        }
+                                        <li class="social_list_item"><a style="color:white" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                    }
+                                    </ul>
+                                </div>
+                                <div class="user_box ml-auto">
+                                    <div class="user_box_login user_box_link">@Html.ActionLink("Login", "Login", "Account")</div>
+                                    <div class="user_box_register user_box_link">@Html.ActionLink("Register", "Register", "Account")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+
+                <nav class="main_nav">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
+                                <div class="logo_container">
+                                    <div class="logo"><a href="/Home/Index"><img src="~/Content/images/logo.png" alt="">travelix</a></div>
+                                </div>
+                                <div class="main_nav_container ml-auto">
+                                    <ul class="main_nav_list">
+                                        <li class="main_nav_item">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                                        <li class="main_nav_item">@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+                                        <li class="main_nav_item">@Html.ActionLink("Tiếp cận", "Contact", "Home")</li>
+                                        <li class="main_nav_item">@Html.ActionLink("Mới", "Blog", "Home")</li>
+                                        <li class="main_nav_item">@Html.ActionLink("Khách sạn", "DSHOTEL", "Home")</li>
+                                    </ul>
+                                </div>
+                                <form action="~/Home/Cart">
+                                    <div class="content_search ml-lg-0 ml-auto">
+                                        <button type="submit" class="btn btn-warning">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+            </header>
+
+            <div class="menu trans_500">
+                <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+                    <div class="menu_close_container"><div class="menu_close"></div></div>
+                    <div class="logo menu_logo"><a href="#"><img src="~/Content/images/logo.png" alt=""></a></div>
+                    <ul>
+                        <li class="menu_item">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                        <li class="menu_item">@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+                        <li class="menu_item">@Html.ActionLink("Tiếp cận", "Contact", "Home")</li>
+                        <li class="menu_item">@Html.ActionLink("Mới", "Blog", "Home")</li>
+                        <li class="main_item">@Html.ActionLink("Khách sạn", "DSHOTEL", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Home -->
+
+            <div class="home">
+
+                <!-- Home Slider -->
+
+                <div class="home_slider_container">
+
+                    <div class="owl-carousel owl-theme home_slider">
+
+                        <!-- Slider Item -->
+                        <div class="owl-item home_slider_item">
+                            <!-- Image -->
+                            <div class="home_slider_background" style="background-image: url('../../Content/images/home_slider.jpg')"></div>
+
+                            <div class="home_slider_content text-center">
+                                <div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
+                                    <h1>TRAVELIX</h1>
+                                    <h1>Ngôi nhà của bạn</h1>
+                                    <div class="button home_slider_button"><div class="button_bcg"></div><a href="/Home/DSHOTEL"> Khám phá ngay <span></span><span></span><span></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider Item -->
+                        <div class="owl-item home_slider_item">
+                            <div class="home_slider_background" style="background-image: url('../../Content/images/blog_background.jpg'); "></div>
+
+                            <div class="home_slider_content text-center">
+                                <div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
+                                    <h1>Tôi yêu</h1>
+                                    <h1>Việt Nam</h1>
+                                    <div class="button home_slider_button"><div class="button_bcg"></div><a href="#"> Khám phá ngay<span></span><span></span><span></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider Item -->
+                        <div class="owl-item home_slider_item">
+                            <div class="home_slider_background" style="background-image: url('../../Content/images/blog_2.jpg'); "></div>
+
+                            <div class="home_slider_content text-center">
+                                <div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
+                                    <h1>Tôi yêu</h1>
+                                    <h1>Việt Nam</h1>
+                                    <div class="button home_slider_button"><div class="button_bcg"></div><a href="#"> Khám phá ngay<span></span><span></span><span></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Home Slider Nav - Prev -->
+                    <div class="home_slider_nav home_slider_prev">
+                        <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
+                        <defs>
+                        <linearGradient id='home_grad_prev'>
+                        <stop offset='0%' stop-color='#fa9e1b' />
+                        <stop offset='100%' stop-color='#8d4fff' />
+						</linearGradient>
+					</defs>
+                        <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+					M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+					C22.545,2,26,5.541,26,9.909V23.091z" />
+                        <polygon class="nav_arrow" fill="#F3F6F9" points="15.044,22.222 16.377,20.888 12.374,16.885 16.377,12.882 15.044,11.55 9.708,16.885 11.04,18.219
+					11.042,18.219 " />
+				</svg>
+                    </div>
+
+                    <!-- Home Slider Nav - Next -->
+                    <div class="home_slider_nav home_slider_next">
+                        <svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
+                        <defs>
+                        <linearGradient id='home_grad_next'>
+                        <stop offset='0%' stop-color='#fa9e1b' />
+                        <stop offset='100%' stop-color='#8d4fff' />
+						</linearGradient>
+					</defs>
+                        <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+				M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+				C22.545,2,26,5.541,26,9.909V23.091z" />
+                        <polygon class="nav_arrow" fill="#F3F6F9" points="13.044,11.551 11.71,12.885 15.714,16.888 11.71,20.891 13.044,22.224 18.379,16.888 17.048,15.554
+				17.046,15.554 " />
+				</svg>
+                    </div>
+
+                    <!-- Home Slider Dots -->
+
+                    <div class="home_slider_dots">
+                        <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+                            <li class="home_slider_custom_dot active"><div></div>01.</li>
+                            <li class="home_slider_custom_dot"><div></div>02.</li>
+                            <li class="home_slider_custom_dot"><div></div>03.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Search -->
+            <div class="search">
+                <!-- Search Contents -->
+                <div class="container fill_height">
+                    <div class="row fill_height">
+                        <div class="col fill_height">
+                            <!-- Search Tabs -->
+                            <div class="search_tabs_container">
+                                <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                                    <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start" style="background-color:darkorange"><img src="~/Content/images/suitcase.png" alt=""><span>Để chúng tôi giúp bạn tìm kiếm gì đó nhé</span></div>
+                                </div>
+                            </div>
+                            <!-- Search Panel -->
+                            <div class="search_panel active">
+                                <form action="@Url.Action("Search", "Home")" method="post" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+                                    <div class="search_item">
+                                        <input type="text" name="search" class="destination search_input" required="required">
+                                        <input type="submit" class="button search_button" value="Tìm kiếm" />
+                                    </div>
+                                </form>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Intro -->
+            <div class="intro" style="background: #1d1b31 ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h2 class="intro_title text-center" style="color:white">Chúng tôi có những Khách Sạn tốt nhất - ưu đãi nhất</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="intro_text text-center">
+                                <p style="color:white">Đồng hành cùng bạn là niềm hạnh phúc của chúng tôi. Hãy tận hưởng không gian riêng, những hành trình của mình và bằng cách nào đó hãy để chúng tôi giúp bạn.</p>
+                                <hr>
+                                <p style="color:white">Xem những ưu đãi sắp tới của chúng tôi và đăng ký!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row intro_items">
+                        <!-- Intro Item -->
+                        @foreach (var item in ViewBag.hotels)
+                        {
+                            if (item.location_id == 7030 || item.location_id == 7040 || item.location_id == 7060)
+                            {
+                                <div class="col-lg-4 intro_col">
+                                    <div class="intro_item">
+                                        <div class="intro_item_overlay"></div>
+                                        <!-- Image -->
+                                        <div class="intro_item_background" style="background-image: url('@item.hotel_image'); "></div>
+                                        <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
+                                            <div class="intro_date">Tháng 12 - 2021</div>
+                                            <div class="button intro_button"><div class="button_bcg"></div><a href="/Home/room/@item.hotel_id">Nhiều hơn</a></div>
+                                            <div class="intro_center text-center">
+                                                @foreach (var i in ViewBag.locations)
+                                                {
+                                                    if (i.location_id == item.location_id)
+                                                    {
+                                                        <h1>@i.city</h1>
+                                                    }
+                                                }
+                                                <div class="intro_price">@item.hotel_gia</div>
+                                                <div class="rating rating_4">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- CTA -->
+            <div class="cta">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <!-- CTA Slider -->
+                            <div class="cta_slider_container">
+                                <div class="owl-carousel owl-theme cta_slider">
+                                    <!-- CTA Slider Item -->
+                                    @foreach (var i in ViewBag.hotels)
+                                    {
+                                        <div class="owl-item cta_item text-center" style="background:#1d1b31; top:65px">
+                                            <div class="cta_title" style="color:white">@i.hotel_name</div>
+                                            <div class="rating_r rating_r_4">
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                                <i></i>
+                                            </div>
+                                            <p class="cta_text"><i>@i.note</i></p>
+                                            <div class="button cta_button"><div class="button_bcg"></div><a href="/Home/room/@i.hotel_id">Đặt</a><span></span><span></span><span></span></div>
+                                        </div>
+                                    }
+                                </div>
+                                <!-- CTA Slider Nav - Prev -->
+                                <div class="cta_slider_nav cta_slider_prev">
+                                    <svg version="1.1" id="Layer_4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
+                                    <defs>
+                                    <linearGradient id='cta_grad_prev'>
+                                    <stop offset='0%' stop-color='#fa9e1b' />
+                                    <stop offset='100%' stop-color='#8d4fff' />
+									</linearGradient>
+								</defs>
+                                    <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+								M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+								C22.545,2,26,5.541,26,9.909V23.091z" />
+                                    <polygon class="nav_arrow" fill="#F3F6F9" points="15.044,22.222 16.377,20.888 12.374,16.885 16.377,12.882 15.044,11.55 9.708,16.885 11.04,18.219
+								11.042,18.219 " />
+							</svg>
+                                </div>
+
+                                <!-- CTA Slider Nav - Next -->
+                                <div class="cta_slider_nav cta_slider_next">
+                                    <svg version="1.1" id="Layer_5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
+                                    <defs>
+                                    <linearGradient id='cta_grad_next'>
+                                    <stop offset='0%' stop-color='#fa9e1b' />
+                                    <stop offset='100%' stop-color='#8d4fff' />
+									</linearGradient>
+								</defs>
+                                    <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+							M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+							C22.545,2,26,5.541,26,9.909V23.091z" />
+                                    <polygon class="nav_arrow" fill="#F3F6F9" points="13.044,11.551 11.71,12.885 15.714,16.888 11.71,20.891 13.044,22.224 18.379,16.888 17.048,15.554
+							17.046,15.554 " />
+							</svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Offers -->
+            <div class="offers" style="background:#1d1b31">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2 class="section_title" style="color:white">Ưu đãi tốt nhất</h2>
+                        </div>
+                    </div>
+                    <div class="row offers_items">
+
+                        <!-- Offers Item -->
+                        @foreach (var b in ViewBag.hotels)
+                        {
+                            if (b.location_id == 7010)
+                            {
+                                <div class="col-lg-6 offers_col">
+
+                                    <div class="offers_item">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="offers_image_container">
+                                                    <!-- Image  -->
+                                                    <div class="offers_image_background" style="background-image: url(@b.hotel_image)"></div>
+                                                    <div class="offer_name"><a href="#">@b.hotel_name</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="offers_content">
+                                                    <div class="offers_price" style="font-size:30px">Giảm 30-45%</div>
+                                                    <div class="rating_r rating_r_4 offers_rating">
+                                                        <i></i>
+                                                        <i></i>
+                                                        <i></i>
+                                                        <i></i>
+                                                        <i></i>
+                                                    </div>
+                                                    <p class="offers_text" style="color:white">@b.note</p>
+                                                    <div class="offers_icons">
+                                                        <ul class="offers_icons_list">
+                                                            <li class="offers_icons_item"><img src="~/Content/images/post.png" alt=""></li>
+                                                            <li class="offers_icons_item"><img src="~/Content/images/compass.png" alt=""></li>
+                                                            <li class="offers_icons_item"><img src="~/Content/images/bicycle.png" alt=""></li>
+                                                            <li class="offers_icons_item"><img src="~/Content/images/sailboat.png" alt=""></li>
+                                                            <li class="button search_button"><a href="/Home/room/@b.hotel_id">Đặt ngay</a><span></span><span></span><span></span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; background:#1d1b31">
+                <h3 style="color:white"><strong/>Tận hưởng những căn phòng tuyệt vời cùng với giá cả hợp lý dành cho bạn!</h3>
+                <br>
+                <video width="700" autoplay muted controls loop>
+                    <source src="~/Content/imagehoanghai/poster1.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <!-- Testimonials - lời nhận xét của khách hàng -->
+            <div class="testimonials" style="background: #1d1b31">
+                <div class="test_border"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2 class="section_title" style="color:white">Khách hàng nói gì về chúng tôi</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="test_slider_container">
+                                <div class="owl-carousel owl-theme test_slider">
+                                    @foreach (var i in ViewBag.Testimonials)
+                                    {
+                                        <div class="owl-item">
+                                            <div class="test_item">
+                                                <div class="test_image">
+                                                    <img style="height:450px" src="@i.test_image">
+                                                </div>
+                                                <div class="test_icon">
+                                                    <img src="@i.test_icon" alt="">
+                                                </div>
+                                                <div class="test_content_container">
+                                                    <div class="test_content">
+                                                        <div class="test_item_info">
+                                                            <div class="test_name">@i.test_name</div>
+                                                        </div>
+                                                        <div class="test_quote_title">@i.test_ngay</div>
+                                                        <p class="test_quote_text">@i.test_note</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <!-- Testimonials Slider Nav - Prev -->
+                            <div class="test_slider_nav test_slider_prev">
+                                <svg version="1.1" id="Layer_6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
+                                <defs>
+                                <linearGradient id='test_grad_prev'>
+                                <stop offset='0%' stop-color='#fa9e1b' />
+                                <stop offset='100%' stop-color='#8d4fff' />
+									</linearGradient>
+								</defs>
+                                <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+								M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+								C22.545,2,26,5.541,26,9.909V23.091z" />
+                                <polygon class="nav_arrow" fill="#F3F6F9" points="15.044,22.222 16.377,20.888 12.374,16.885 16.377,12.882 15.044,11.55 9.708,16.885 11.04,18.219
+								11.042,18.219 " />
+							</svg>
+                            </div>
+                            <!-- Testimonials Slider Nav - Next -->
+                            <div class="test_slider_nav test_slider_next">
+                                <svg version="1.1" id="Layer_7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
+                                <defs>
+                                <linearGradient id='test_grad_next'>
+                                <stop offset='0%' stop-color='#fa9e1b' />
+                                <stop offset='100%' stop-color='#8d4fff' />
+									</linearGradient>
+								</defs>
+                                <path class="nav_path" fill="#F3F6F9" d="M19,0H9C4.029,0,0,4.029,0,9v15c0,4.971,4.029,9,9,9h10c4.97,0,9-4.029,9-9V9C28,4.029,23.97,0,19,0z
+							M26,23.091C26,27.459,22.545,31,18.285,31H9.714C5.454,31,2,27.459,2,23.091V9.909C2,5.541,5.454,2,9.714,2h8.571
+							C22.545,2,26,5.541,26,9.909V23.091z" />
+                                <polygon class="nav_arrow" fill="#F3F6F9" points="13.044,11.551 11.71,12.885 15.714,16.888 11.71,20.891 13.044,22.224 18.379,16.888 17.048,15.554
+							17.046,15.554 " />
+							</svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="trending" style="background:#1d1b31">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <h2 class="section_title" style="color:white">Xu hướng hiện tại</h2>
+                    </div>
+                </div>
+                <div class="row trending_container">
+                    <!-- Trending Item (xu hướng)-->
+                    @foreach (var item in ViewBag.hotels)
+                    {
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="trending_item clearfix">
+                                <div class="trending_image"><img src="@item.hotel_image"></div>
+                                <div class="trending_content">
+                                    <div class="trending_title"><a style="color:white" href="/Home/room/@item.hotel_id">@item.hotel_name</a></div>
+                                    <div class="trending_price">From 3.750.000VNĐ</div>
+                                    @foreach (var a in ViewBag.locations)
+                                    {
+                                        if (a.location_id == item.location_id)
+                                        {
+                                            <div class="trending_location" style="color:white"><strong>@a.city</strong></div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="contact">
+            <div class="contact_background" style="background-image:url(../../Content/images/contact.png)"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="contact_image">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="contact_form_container">
+                            <div class="contact_title" style="text-align: center">Gửi phản hồi cho chúng tôi</div>
+                            <form action="@Url.Action("sendmail", "SendMail")" id="contact_form" class="contact_form" method="post">
+                                <input name="Name" type="text" id="Name" class="contact_form_name input_field" placeholder="Họ Tên" required="required" data-error="Name is required.">
+                                <input name="Email" type="text" id="Email" class="contact_form_email input_field" placeholder="E-mail" required="required" data-error="Email is required.">
+                                <input name="subject" type="text" id="subject" class="contact_form_subject input_field" placeholder="Tiêu đề" required="required" data-error="Subject is required.">
+                                <textarea name="message" id="message" class="text_field contact_form_message" rows="4" placeholder="Nội dung" required="required" data-error="Please, write us a message."></textarea>
+                                <button type="submit" id="form_submit_button" class="form_submit_button button">Phản hồi<span></span><span></span><span></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <footer class="footer">
+            <!-- Footer -->
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Column -->
+                    <div class="col-lg-3 footer_column">
+                        <div class="footer_col">
+                            <div class="footer_content footer_about">
+                                <div class="logo_container footer_logo">
+                                    <div class="logo"><a href="#"><img src="~/Content/images/logo.png" alt="">travelix</a></div>
+                                </div>
+                                <p class="footer_about_text">Nỗi đau chính là tình yêu, trọng tâm của chúng tôi chính là bạn.</p>
+                                <ul class="footer_social_list">
+                                    <li class="footer_social_item"><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+                                    <li class="footer_social_item"><a href="https://www.facebook.com/profile.php?id=100009744285303"><i class="fa fa-facebook-f"></i></a></li>
+                                    <li class="footer_social_item"><a href="https://twitter.com/?lang=vi"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="footer_social_item"><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                                    <li class="footer_social_item"><a href="https://www.behance.net/"><i class="fa fa-behance"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Column Blog-->
+                    <div class="col-lg-3 footer_column">
+                        <div class="footer_col">
+                            <div class="footer_title">Mới</div>
+                            <div class="footer_content footer_blog">
+                                @foreach (var b in ViewBag.hotels)
+                                {
+                                    if (b.location_id == 7060)
+                                    {
+                                        <!-- Footer blog item -->
+                                        <div class="footer_blog_item clearfix">
+                                            <div class="footer_blog_image"><img src="@b.hotel_image"></div>
+                                            <div class="footer_blog_content">
+                                                <div class="trending_title"><a href="/Home/room/@b.hotel_id" style="color:aqua">@b.hotel_name</a></div>
+                                                <div class="footer_blog_date">@b.hotel_gia</div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Column tag-->
+                    <div class="col-lg-3 footer_column">
+                        <div class="footer_col">
+                            <div class="footer_title">tags</div>
+                            <div class="footer_content footer_tags">
+                                <ul class="tags_list clearfix">
+                                    <li class="tag_item"><a href="/Home/About">#About</a></li>
+                                    <li class="tag_item"><a href="/Home/Contact">#Contact</a></li>
+                                    <li class="tag_item"><a href="/Home/Offers">#Offers</a></li>
+                                    <li class="tag_item"><a href="/Home/Blog">#Blog</a></li>
+                                    <li class="tag_item"><a href="/Home/DSHOTEL">#DSHOTEL</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Column thông tin-->
+                    <div class="col-lg-3 footer_column">
+                        <div class="footer_col">
+                            <div class="footer_title">contact info</div>
+                            <div class="footer_content footer_contact">
+                                <ul class="contact_info_list">
+                                    <li class="contact_info_item d-flex flex-row">
+                                        <div><div class="contact_info_icon"><img src="~/Content/images/placeholder.svg" alt=""></div></div>
+                                        <div class="contact_info_text">Đường số 2, Tòa nhà 7, Q.10, TP.HCM</div>
+                                    </li>
+                                    <li class="contact_info_item d-flex flex-row">
+                                        <div><div class="contact_info_icon"><img src="~/Content/images/phone-call.svg" alt=""></div></div>
+                                        <div class="contact_info_text">0933-037-283</div>
+                                    </li>
+                                    <li class="contact_info_item d-flex flex-row">
+                                        <div><div class="contact_info_icon"><img src="~/Content/images/message.svg" alt=""></div></div>
+                                        <div class="contact_info_text"><a href="mailto:contactme@gmail.com?Subject=Hello" target="_top">nhuhoanghai@gmail.com</a></div>
+                                    </li>
+                                    <li class="contact_info_item d-flex flex-row">
+                                        <div><div class="contact_info_icon"><img src="~/Content/images/planet-earth.svg" alt=""></div></div>
+                                        <div class="contact_info_text"><a href="https://colorlib.com">www.colorlib.com</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 order-lg-1 order-2  ">
+                        <div class="copyright_content d-flex flex-row align-items-center">
+                            <div>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://www.facebook.com/profile.php?id=100009744285303" target="_blank">Nhữ Hoàng Hải</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 order-lg-2 order-1">
+                        <div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
+                            <div class="footer_nav">
+                                <ul class="footer_nav_list">
+                                    <li class="footer_nav_item">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                                    <li class="footer_nav_item">@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+                                    <li class="footer_nav_item">@Html.ActionLink("Tiếp cận", "Contact", "Home")</li>
+                                    <li class="footer_nav_item">@Html.ActionLink("Mới", "Blog", "Home")</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- Messenger Plugin chat Code -->
+<div id="fb-root"></div>
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "105076572026711");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+<!-- Your SDK code -->
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v12.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

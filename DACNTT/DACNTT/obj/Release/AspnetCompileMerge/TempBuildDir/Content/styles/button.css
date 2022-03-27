@@ -1,0 +1,32 @@
+﻿.hai {
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    display: inline-block;
+    padding: 12px 12px;
+    color: white;
+    font-size: 13px;
+}
+
+    .hai:hover {
+        background: #00FFFF;
+        color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 0 5px #00FFFF, 0 0 25px #00FFFF, 0 0 50px #00FFFF, 0 0 100px #00FFFF;
+    }
+
+.hai2{
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    display: inline-block;
+    padding: 12px 12px;
+    color: white;
+    font-size: 13px;
+}
+
+
+
+

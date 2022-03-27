@@ -1,0 +1,277 @@
+﻿@model IEnumerable<DACNTT.Models.rooms>
+@using DACNTT.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/styles/nav_bar.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/TableAdmin.css" rel="stylesheet" />
+    <link href="~/Content/styles/button.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar close">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">Travelix</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/Home/Index">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Trang chủ</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/Index">Trang chủ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Home/DSHOTEL">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="link_name">Khách sạn</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/DSHOTEL">Khách sạn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-collection'></i>
+                            <span class="link_name">Khác</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Nhiều hơn</a></li>
+                        <li><a href="/Home/About">Về chúng tôi</a></li>
+                        <li><a href="/Home/Contact">Tiếp cận</a></li>
+                        <li><a href="/Home/Blog">Blog</a></li>
+                        <li><a href="/Home/Cart">Giỏ hàng</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">Admin</div>
+                            <div class="job">Nhữ Hoàng Hải</div>
+                        </div>
+                        <i class='bx bx-log-out'></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i>
+                <span class="text"></span>&emsp;&emsp;&emsp;
+            </div>
+        </section>
+        <table class="table-users">
+            <thead style="text-align:center">
+                <tr>
+                    <th><h3>Hotel</h3></th>
+                    <th><h3>Phòng</h3></th>
+                    <th><h3>Kiểu</h3></th>
+                    <th><h3>Khuyến mãi</h3></th>
+                    <th><h3>Tầng</h3></th>
+                    <th><h3>Giá (VNĐ)</h3></th>
+                    <th><h3>Trạng thái</h3></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @foreach (var i in ViewBag.hotels)
+                        {
+                            if (item.hotel_id == i.hotel_id)
+                            {
+                                <td>@i.hotel_name</td>
+                            }
+                        }
+
+                        <td>@item.room_id</td>
+
+                        @foreach (var i in ViewBag.section)
+                        {
+                            if (item.section_id == i.section_id)
+                            {
+                                <td>@i.room_type</td>
+                            }
+                        }
+                        @foreach (var i in ViewBag.sale)
+                        {
+                            if (item.sale_id == i.sale_id)
+                            {
+                                <td>@i.sale_percent %</td>
+                            }
+                        }
+                        <td>@item.floor</td>
+                        <td>@item.gia</td>
+                        <td>
+                            @{ var o = false; }
+                            @foreach (var i in ViewBag.bookcustomer)
+                            {
+                                if (i.room_id == item.room_id)
+                                {
+                                    o = true;
+                                }
+                            }
+                            @if (o)
+                            {
+                                <i>Hết phòng</i>
+                            }
+                            else
+                            {
+                                <i>Còn phòng</i>
+                            }
+                        </td>
+                        @*Nút button Modal đặt phòng*@
+                        @if (o == false)
+                        {
+                            <th>
+                                <button id="btnclick" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="onclickbookroom(@item.room_id)">
+                                    Đặt phòng
+                                </button>
+                            </th>
+                        }
+                        @* Modal đặt phòng *@
+                        <th class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="border-radius:30px; margin-top:120px">
+                                    <form method="post">
+                                        <div class="modal-header" style="text-align: center">
+                                            <h3 class="modal-title" id="myModalLabel" style="color: coral; background-color: #1d1b31">Nhập thông tin của bạn</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-content" style="background-color: #1d1b31">
+                                            <div class="modal-body">
+                                                <input name="id" id="id" hidden />
+                                                <div class="form-group" style="text-align:start">
+                                                    <label class="col-md-2 control-label" for="NameCus">Họ tên</label>
+                                                    <div class="col-md-10">
+                                                        <input name="NameCus" required="required" /> <br>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align:start" class="form-group">
+                                                    <label class="col-md-2 control-label" for="Phone">SĐT</label>
+                                                    <div class="col-md-10">
+                                                        <input name="Phone" pattern="[0-9].{9}" required="required" /> <br>
+                                                    </div>
+                                                </div>
+
+                                                <div style="text-align:start" class="form-group">
+                                                    <label class="col-md-2 control-label" for="NgayStart">Check in</label>
+                                                    <div class="col-md-10" id="checkin">
+                                                        <input  name="NgayStart" type="date" required="required" value=""/> <br>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align:start" class="form-group">
+                                                    <label class="col-md-2 control-label" for="NgayEnd">Check out</label>
+                                                    <div class="col-md-10"  id="checkout">
+                                                        <input name="NgayEnd" type="date" required="required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                            <button type="submit" class="btn btn-primary">Đặt phòng</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+jQuery( function($) {
+    var dateFormat = "yy-mm-dd",
+        from = $( "#checkin" )
+        .datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        })
+        .on( "change", function() {
+        console.log('helloo');
+        to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+        to = $( "#checkout" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        })
+        .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+        });
+    function getDate( element ) {
+        var date;
+        try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+        } catch( error ) {
+        date = null;
+        }
+        return date;
+    }
+} );
+</script>
+
+
+<script>
+    function onclickbookroom(id) {
+        $("#id").val(id);
+        alert("Bạn có chắc muốn đặt phòng này?" + ", Mã phòng là" + id);
+    }
+</script>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>
+<!-- Messenger Plugin chat Code -->
+<div id="fb-root"></div>
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "105076572026711");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+<!-- Your SDK code -->
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v12.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

@@ -1,0 +1,214 @@
+﻿@model DACNTT.Models.hotels
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/styles/nav_bar.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/button.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar close">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">Admin</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/Home/IndexAdmin">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Trang chủ</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/IndexAdmin">Trang chủ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-collection'></i>
+                            <span class="link_name">Khác</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Khác</a></li>
+                        <li><a href="/Home/Admin">QL đặt phòng</a></li>
+                        <li><a href="/Home/HOTELAdmin">Khách sạn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Home/QLTK">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Tài khoản</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/QLTK">Quản lý tài khoản</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <!--<img src="image/profile.jpg" alt="profileImg">-->
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">Admin</div>
+                            <div class="job">Nhữ Hoàng Hải</div>
+                        </div>
+                        <i class='bx bx-log-out'></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i>        
+            </div>
+        </section>
+        @using (Html.BeginForm("CreateHotel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_id, "Mã khách sạn", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.hotel_id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.hotel_id, "Vui lòng nhập mã số khách sạn", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.location_id, "Địa điểm", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.location_id, new List<SelectListItem>()
+                           {
+                                    new SelectListItem(){Selected = true, Text ="Hà Nội", Value = "7000"},
+                                    new SelectListItem(){Selected = true, Text ="Hồ Chí Minh", Value = "7010"},
+                                    new SelectListItem(){Selected = true, Text ="Đà Nẵng", Value = "7020"},
+                                    new SelectListItem(){Selected = true, Text ="Hải Phòng", Value = "7030"},
+                                    new SelectListItem(){Selected = true, Text ="Quảng Ninh", Value = "7040"},
+                                    new SelectListItem(){Selected = true, Text ="Quảng Bình", Value = "7050"},
+                                    new SelectListItem(){Selected = true, Text ="Đà Lạt", Value = "7060"},
+                                    new SelectListItem(){Selected = true, Text ="Huế", Value = "7070"},
+                                    new SelectListItem(){Selected = true, Text ="Khánh Hoà", Value = "7080"},
+                                    new SelectListItem(){Selected = true, Text ="Lạng Sơn", Value = "7090"},
+                                    new SelectListItem(){Selected = true, Text ="Thanh Hoá", Value = "7110"},
+                                    new SelectListItem(){Selected = true, Text ="Nghệ An", Value = "7220"},
+                                    new SelectListItem(){Selected = true, Text ="Bắc Ninh", Value = "7330"},
+                                    new SelectListItem(){Selected = true, Text ="Hưng Yên", Value = "7440"},
+                                    new SelectListItem(){Selected = true, Text ="Nam Định", Value = "7550"},
+                                    new SelectListItem(){Selected = true, Text ="Phú Yên", Value = "7660"},
+                                    new SelectListItem(){Selected = true, Text ="Buôn Ma Thuột", Value = "7770"},
+                                    new SelectListItem(){Selected = true, Text ="Cần Thơ", Value = "7880"},
+                                    new SelectListItem(){Selected = true, Text ="Kiên Giang", Value = "7990"},
+                           }, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.location_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_name, "Tên Khách sạn", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.hotel_name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.hotel_name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.note, "Miêu tả", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_gia, "Giá trung bình (VNĐ)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.hotel_gia, new List<SelectListItem>()
+                         {
+                                  new SelectListItem(){Selected = true, Text ="Dưới 1 Triệu VNĐ", Value = "600,000-1,000,000VNĐ"},
+                                  new SelectListItem(){Selected = false, Text ="Trên 1 Triệu VNĐ", Value = "1,000,000-2,000,000NVĐ"},
+                                  new SelectListItem(){Selected = true, Text ="Trên 2 Triệu VNĐ", Value = "2,000,000-3,000,000VNĐ"},
+                                  new SelectListItem(){Selected = false, Text ="Trên 3 Triệu VNĐ", Value = "3,000,000-4,000,000VNĐ"},
+                          }, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.hotel_gia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_review, "Chỉ số đánh giá 1-100", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.hotel_review, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.hotel_review, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_title, "Đánh giá dịch vụ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.hotel_title, new List<SelectListItem>()
+                          {
+                                   new SelectListItem(){Selected = true, Text ="Rất tốt", Value = "Rất tốt"},
+                                   new SelectListItem(){Selected = false, Text ="Tốt", Value = "Tốt"},
+                          }, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.hotel_title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_rating, "Xếp hạng 1-10", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.hotel_rating, new List<SelectListItem>()
+                     {
+                            new SelectListItem(){Selected = true, Text ="1.1", Value = "1.1"},
+                            new SelectListItem(){Selected = true, Text ="2.1", Value = "2.1"},
+                            new SelectListItem(){Selected = true, Text ="3.1", Value = "3.1"},
+                            new SelectListItem(){Selected = true, Text ="4.1", Value = "4.1"},
+                            new SelectListItem(){Selected = true, Text ="5.1", Value = "5.1"},
+                            new SelectListItem(){Selected = true, Text ="6.1", Value = "6.1"},
+                            new SelectListItem(){Selected = true, Text ="7.1", Value = "7.1"},
+                            new SelectListItem(){Selected = true, Text ="8.1", Value = "8.1"},
+                            new SelectListItem(){Selected = true, Text ="9.1", Value = "9.1"},
+                            new SelectListItem(){Selected = true, Text ="10", Value = "10"},
+                   }, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.hotel_rating, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group2">
+                    @Html.LabelFor(model => model.hotel_image, "Hình ảnh", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="hinhanh" id="hinhanh" />
+                    </div>
+                </div>
+                <div class="form-group2">
+                    <div class="hai">
+                        <input type="submit" value="Thêm" class="btn btn-outline-dark" />
+                    </div>
+                    <div class="hai">
+                        <div class="btn btn-outline-dark"><a href="/Home/HOTELAdmin" style="color:black">Quay lại</a></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>

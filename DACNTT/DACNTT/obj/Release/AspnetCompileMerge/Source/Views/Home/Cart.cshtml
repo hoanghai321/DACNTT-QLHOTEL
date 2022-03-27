@@ -1,0 +1,173 @@
+﻿@model IEnumerable<DACNTT.Models.bookcustomer>
+@using DACNTT.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/styles/nav_bar.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/TableAdmin.css" rel="stylesheet" />
+    <link href="~/Content/styles/button.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar close">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">Admin</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/Home/Index">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Trang chủ</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/Index">Trang chủ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Home/DSHOTEL">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="link_name">Khách sạn</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/DSHOTEL">Khách sạn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-collection'></i>
+                            <span class="link_name">Khác</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Nhiều hơn</a></li>
+                        <li><a href="/Home/About">Về chúng tôi</a></li>
+                        <li><a href="/Home/Contact">Tiếp cận</a></li>
+                        <li><a href="/Home/Blog">Blog</a></li>
+                        <li><a href="/Home/Cart">Giỏ hàng</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">Admin</div>
+                            <div class="job">Nhữ Hoàng Hải</div>
+                        </div>
+                        <i class='bx bx-log-out'></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i>
+                <span class="text"></span>&emsp;&emsp;&emsp;
+            </div>
+        </section>
+        <h2 style="text-align:center;color:black">Thông tin đăng ký phòng</h2>
+        <table class="table-users">
+            <thead style="text-align:center">
+                <tr>
+                    <th scope="col">Số phòng</th>
+                    <th scope="col">Họ tên</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ngày đến</th>
+                    <th scope="col">Ngày đi</th>
+                    <th scope="col">Giá phòng(VNĐ)</th>
+                    <th scope="col">Hiệu lực</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                @foreach (var item in ViewBag.bookcustomer)
+                {
+                    if (item.Email == (string)Session["Email"])
+                    {
+                        <tr>
+                            <td>@item.room_id</td>
+                            <td>@item.NameCus</td>
+                            <td>@item.Email</td>
+                            <td>@item.NgayStart</td>
+                            <td>@item.NgayEnd</td>
+                            @foreach (var i in ViewBag.rooms)
+                            {
+                                if (i.room_id == item.room_id)
+                                {
+                                    <td>@i.gia</td>
+                                }
+                            }
+                            <td>
+                                @if (item.TrangThai == 2)
+                                {
+                                    <i style="font-size:24px" class="fa">&#xf00d;</i>
+                                }
+                                @if (item.TrangThai == 1)
+                                {
+                                    <i style="font-size:24px" class="fa">&#xf058;</i>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+    function onclickbookroom(id) {
+        $("#id").val(id);
+        alert("Bạn có chắc muốn đặt phòng này?" + ", Mã phòng là" + id);
+    }
+</script>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>
+<!-- Messenger Plugin chat Code -->
+<div id="fb-root"></div>
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "105076572026711");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+<!-- Your SDK code -->
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v12.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

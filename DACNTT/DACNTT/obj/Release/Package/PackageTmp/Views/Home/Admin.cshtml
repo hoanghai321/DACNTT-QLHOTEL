@@ -1,0 +1,151 @@
+﻿@model IEnumerable<DACNTT.Models.bookcustomer>
+@*@using DACNTT.Models;*@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/styles/nav_bar.css" rel="stylesheet" />
+    <link href="~/Content/styles/TableAdmin.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/styles/button.css" rel="stylesheet" />
+</head>
+<body  style="background-color: white">   
+    <div class="container">
+        <div class="sidebar close">
+            <div class="logo-details">
+                <i class='bx bxl-c-plus-plus'></i>
+                <span class="logo_name">Admin</span>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/Home/IndexAdmin">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Trang chủ</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/IndexAdmin">Trang chủ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-collection'></i>
+                            <span class="link_name">Khác</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Khác</a></li>
+                        <li><a href="/Home/Admin">QL đặt phòng</a></li>
+                        <li><a href="/Home/HOTELAdmin">Khách sạn</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/Home/QLTK">
+                        <i class='bx bx-cog'></i>
+                        <span class="link_name">Tài khoản</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/QLTK">Quản lý tài khoản</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <!--<img src="image/profile.jpg" alt="profileImg">-->
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">Admin</div>
+                            <div class="job">Nhữ Hoàng Hải</div>
+                        </div>
+                        <i class='bx bx-log-out'></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i> &emsp;&emsp;&emsp; &emsp;&emsp;&emsp; &emsp;&emsp;&emsp; &emsp;&emsp;&emsp;
+                <div class="nav-item active">
+                    <form class="form-inline" action="@Url.Action("SearchAdmin", "Home")" method="post">
+                        <input name="search_param" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required />
+                        <input style="color:black" class="hai btn-outline-secondary my-2 my-sm-0" type="submit" value="Tìm kiếm" />
+                    </form>
+                </div>   &emsp; &emsp;
+                <div class="nav-item active">
+                    <form class="form-inline" action="@Url.Action("Admin", "Home")" method="post">
+                        <input style="color:black" class="hai btn-outline-secondary my-2 my-sm-0" type="submit" value="Reset" />
+                    </form>
+                </div>
+            </div>
+        </section>       
+        <div class="table-users">
+            <table cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã phòng</th>
+                        <th>Mã Hotel</th>
+                        <th>Họ Tên KH</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Check in</th>
+                        <th>Check out</th>
+                        <th>Hiệu lực</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in ViewBag.bookcustomer)
+                    {
+                        <tr>
+                            <td>@i.room_id</td>
+                            @foreach (var item in ViewBag.rooms)
+                            {
+                                if (item.room_id == i.room_id)
+                                {
+                                    <td>@item.hotel_id</td>
+                                }
+                            }
+                            <td>@i.NameCus</td>
+                            <td>@i.Email</td>
+                            <td>@i.Phone</td>
+                            <td>@i.NgayStart</td>
+                            <td>@i.NgayEnd</td>
+                            <td>
+                                @if (i.TrangThai == 2)
+                                {
+                                    <i style="font-size:24px" class="fa">&#xf00d;</i>
+                                }
+                                @if (i.TrangThai == 1)
+                                {
+                                    <i style="font-size:24px" class="fa">&#xf058;</i>
+                                }
+                            </td>
+                            <td><a class="hai2" href="#" onclick="if (confirm('Bạn có chắc muốn xoá không?') == true) { location.href='/Home/Delete/@i.room_id' }">Xoá</a></td>
+                            <td><a class="hai2" href="~/Home/Edit/@i.room_id">Chỉnh</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>
